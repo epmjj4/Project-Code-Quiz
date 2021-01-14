@@ -1,0 +1,16 @@
+body{
+    background-color: rgb(150, 150, 240);
+}
+#startButton{
+    background-color: cornflowerblue;
+    width: 10%;
+    height: 40px;
+}
+.selection {
+    height: 15px;
+    width: 25px;
+}
+
+
+
+
