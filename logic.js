@@ -29,7 +29,7 @@ var quizQuestion = [{
 
 },
 
-]
+];
 var questionIndex = 0;
 var questionTime = quizQuestion.length * 15;
 
@@ -45,7 +45,7 @@ var elAnswers = document.querySelector("#choices");
 var hidden = document.querySelector('.hide');
 //I created a startButton variable to target button on the page and start the quiz.
 var startBtn = document.querySelector("#startButton");
-var rightWrongEl = document.querySelector('#rightWrong')
+var rightWrongEl = document.querySelector('#rightWrong');
 
 startBtn.addEventListener("click", function (event) {
 console.log(event.target);
@@ -84,18 +84,18 @@ for (var i = 0; i < quizQuestion[questionIndex].answerIndex; i++) {
 
     //grabbing question from the array
     var presentQuestion = quizQuestion[questionIndex].quotes;
-    var quoteElement = document.getElementById('question-quote')
+    var quoteElement = document.getElementById('question-quote');
     quoteElement.textContent = presentQuestion.quote;
     elAnswers.textContent = " ";
     presentQuestion.choices.forEach(function (choice, index) {
         var choiceBtn = document.createElement('button');
         choiceBtn.setAttribute('class', 'choices');
-        choiceBtn.setAttribute('value', choices);
+        choiceBtn.setAttribute('value', 'choices');
         choiceBtn.textContent = index + 1 + "." + choice;
         // add an event listener to choice button
         choiceBtn.onclick = choiceClick;
         elAnswers.appendChild(choiceBtn);
-    })
+    });
 
 }
 
@@ -116,13 +116,13 @@ if (this.value !== quizQuestion[questionIndex].answer) {
 rightWrongEl.setAttribute('class', 'rightWrong');
 setTimeout(function () {
     rightWrongEl.setAttribute('class', "rightWrong hide");
-}, 1000)
+}, 1000);
 
 questionIndex++;
 if (questionIndex === quizQuestion.lengh) {
-    endQuiz()
+    endQuiz();
 } else {
-    showQuestion
+    showQuestion();
 }
 
 }
