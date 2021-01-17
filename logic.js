@@ -34,29 +34,29 @@ var questionIndex = 0;
 var questionTime = quizQuestion.length * 15;
 
 //created a div container with id of quiz
-var divQuiz = document.querySelector('#quiz');
+var divQuiz = document.getElementById('quiz');
 //I created a divTimer variable to target timer ID.
-var divTimer = document.querySelector('#time');
+var divTimer = document.getElementById('time');
 //I created a divQuestions variable to target questions ID.
-var divQuestions = document.querySelector('#questions');
+var divQuestions = document.getElementById('questions');
 //I created a elAnswers variable to target and ordered list with choices ID.
-var elAnswers = document.querySelector("#choices");
+var elAnswers = document.getElementById("choices");
 //I created a hidden variable to hide text content once quiz starts
-var hidden = document.querySelector('.hide');
+var hidden = document.getElementsByClassName('hide');
 //I created a startButton variable to target button on the page and start the quiz.
-var startBtn = document.querySelector("#startButton");
-var rightWrongEl = document.querySelector('#rightWrong');
+var startBtn = document.getElementById("startButton");
+var rightWrongEl = document.getElementById('rightWrong');
 var endQuiz = true;
 
-startBtn.addEventListener("click", function (event) {
-    console.log(event.target);
-    prepareQuiz();
-});
+// startBtn.addEventListener("click", function (event) {
+//     console.log(event.target);
+//     prepareQuiz();
+// });
 
-document.querySelector('.timer').style.visibility = 'hidden';
+//document.getElementsByClassName('.timer').style.visibility = 'hidden';
 //declare function that has the timer and will go to the next step once it stops at zero
 function prepareQuiz() {
-    document.querySelector('.timer').style.visibility = 'visible';
+    document.getElementsByClassName('.timer').style.visibility = 'visible';
     //created a variable for 5 seconds, which will notify user how many seconds there are until quiz begins.
     var seconds = 3;
     //create countdown timer.
@@ -68,7 +68,7 @@ function prepareQuiz() {
         //clears timer
         if (seconds === 0) {
             divTimer.textContent = " ";
-            document.querySelector('.timer').style.visibility = 'hidden';
+            document.getElementsByClassName('.timer').style.visibility = 'hidden';
             //stop timer
             clearInterval(questionInterval);
             // You need to add function to show what happens when timer equals zero
@@ -81,15 +81,15 @@ function prepareQuiz() {
 }
 
 function showQuestion() {
-
+    
     //grabbing question from the array
-    divQuestions.textContent = quizQuestion[questionIndex].quotes;
-    divQuiz.textContent = quizQuestion[questionIndex].answerIndex;
-    var answers = presentQuestion.choices;
+    // divQuestions.textContent = quizQuestion[questionIndex].quotes;
+    // divQuiz.textContent = quizQuestion[questionIndex].answerIndex;
     var presentQuestion = quizQuestion[questionIndex];
+    var answers = presentQuestion.choices;
     var quoteElement = document.getElementById('question-quote');
     quoteElement.textContent = presentQuestion.quotes;
-    elAnswers.textContent = " ";
+    elAnswers.innerHTML = "";
     answers.forEach(function (choice, index) {
         var choiceBtn = document.createElement('button');
         choiceBtn.setAttribute('class', 'choices');
@@ -132,4 +132,4 @@ function choiceClick() {
     }
 
 }
-startBtn.onclick = showQuestion;
+startBtn.onclick = showQuestion();
