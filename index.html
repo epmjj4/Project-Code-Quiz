@@ -5,29 +5,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Code Quiz</title>
-    <link rel="stylesheet" href="style.css"></link>
+    <link rel="stylesheet" href="style.css">
+    </link>
 </head>
 
 <body>
-    <main>
-        <button id="startButton" class="hide">Begin Quiz</button>
-
-    </main>
-    <div class="hide" id="quiz">
-        <h1 id="timer"></h1>
-        <h1 id="questions"></h1>
-        <ol id="choices"></ol>
-        <form>
-            <input type="radio" id="choice-1" class="selection" name="choice-1" value="choice-1">
-            <label for="choice-1">A</label><br>
-            <input type="radio" id="choice-2" class="selection" name="choice-2" value="choice-2">
-            <label for="choice-2">B</label><br>
-            <input type="radio" id="choice-3" class="selection" name="choice-3" value="choice-3">
-            <label for="choice-3">C</label><br>
-            <input type="radio" id="choice-4" class="selection" name="choice-4" value="choice-4">
-            <label for="choice-4">D</label>
+    <div>
+        <form action= "scores.html">
+            <button class="scores" type="View HighScores">View High Scores</button>
         </form>
-        </div>
+      
+    </div>
+    <div class="timer">Time: <span id="time"></span></div>
+
+
+    
+<div class="container">
+    <div id="start-screen"class="start">
+        <h1>Coding Quiz Challenge</h1>
+        <p>
+            Try to answer the following code-related questions within the time
+            limit. Keep in mind that incorrect answers will penalize your
+            score/time by ten seconds!
+        </p>
+        <button id="startButton" class="hide">Begin Quiz</button>
+    </div>
+
+
+<div id="questions" class="hide">
+<h2 id="question-quote"></h2>
+<div class="choices" id="choices"></div>
+</div>
+
+<div id="end-screen" class="hide">
+<h2>All Done</h2>
+<p>Your final Score <span id="final-score"></span></p>
+<p>Enter initials : <input type="text" id="initials" max="3"></p>
+<button id="submit">Submit</button>
+</div>    
+  <div class="rightWrong" class="rightWrong hide">
+</div>
+  </div>      
+    </div>
     <script src="logic.js"></script>
     <script src="questions.js"></script>
 </body>
