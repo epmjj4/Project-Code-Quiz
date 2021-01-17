@@ -31,7 +31,8 @@ var quizQuestion = [{
 },
 
 ]
-
+// var score = 0;
+// for (var i = 0; i< quizQuestion[i])
 
 
 
