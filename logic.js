@@ -46,6 +46,7 @@ var hidden = document.querySelector('.hide');
 //I created a startButton variable to target button on the page and start the quiz.
 var startBtn = document.querySelector("#startButton");
 var rightWrongEl = document.querySelector('#rightWrong');
+var endQuiz = true;
 
 startBtn.addEventListener("click", function (event) {
 console.log(event.target);
@@ -81,21 +82,26 @@ var questionInterval = setInterval(function () {
 }
 function showQuestion() {
 for (var i = 0; i < quizQuestion[questionIndex].answerIndex; i++) {
+    if(choices === quizQuestion[questionIndex].answerIndex){
+    divQuestions.textContent = quizQuestion[questionIndex].quotes;
+    divQuiz.textContent = quizQuestion[questionIndex].answerIndex
 
-    //grabbing question from the array
-    var presentQuestion = quizQuestion[questionIndex].quotes;
-    var quoteElement = document.getElementById('question-quote');
-    quoteElement.textContent = presentQuestion.quote;
-    elAnswers.textContent = " ";
-    presentQuestion.choices.forEach(function (choice, index) {
-        var choiceBtn = document.createElement('button');
-        choiceBtn.setAttribute('class', 'choices');
-        choiceBtn.setAttribute('value', 'choices');
-        choiceBtn.textContent = index + 1 + "." + choice;
-        // add an event listener to choice button
-        choiceBtn.onclick = choiceClick;
-        elAnswers.appendChild(choiceBtn);
-    });
+    
+}
+    // //grabbing question from the array
+    // var presentQuestion = quizQuestion[questionIndex].quotes;
+    // var quoteElement = document.getElementById('question-quote');
+    // quoteElement.textContent = presentQuestion.quote;
+    // elAnswers.textContent = " ";
+    // presentQuestion.choices.forEach(function (choice, index) {
+    //     var choiceBtn = document.createElement('button');
+    //     choiceBtn.setAttribute('class', 'choices');
+    //     choiceBtn.setAttribute('value', 'choices');
+    //     choiceBtn.textContent = index + 1 + "." + choice;
+    //     // add an event listener to choice button
+    //     choiceBtn.onclick = choiceClick;
+    //     elAnswers.appendChild(choiceBtn);
+    //});
 
 }
 
@@ -119,7 +125,7 @@ setTimeout(function () {
 }, 1000);
 
 questionIndex++;
-if (questionIndex === quizQuestion.lengh) {
+if (questionIndex === quizQuestion.length) {
     endQuiz();
 } else {
     showQuestion();
