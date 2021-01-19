@@ -33,9 +33,7 @@ var quizQuestion = [{
 var questionIndex = 0;
 var questionTime = quizQuestion.length * 15;
 
-//created a div container with id of quiz
-var divQuiz = document.getElementById('quiz');
-//I created a divTimer variable to target timer ID.
+//this will display time onto the page
 var divTimer = document.getElementById('time');
 //I created a divQuestions variable to target questions ID.
 var divQuestions = document.getElementById('questions');
@@ -45,18 +43,26 @@ var elAnswers = document.getElementById("choices");
 var hidden = document.getElementsByClassName('hide');
 //I created a startButton variable to target button on the page and start the quiz.
 var startBtn = document.getElementById("startButton");
+//this will show if the answers are right or wrong
 var rightWrongEl = document.getElementById('rightWrong');
 var endQuiz = true;
+//This will show current score count
+var scoreCount = 0;
+//This will show total score
+var totalScore = 0;
 
-// startBtn.addEventListener("click", function (event) {
-//     console.log(event.target);
-//     prepareQuiz();
-// });
+startBtn.addEventListener("click", function (event) {
+    console.log(event.target);
+    prepareQuiz();
+});
 
-//document.getElementsByClassName('.timer').style.visibility = 'hidden';
+
+
+ //document.getElementsByClassName('timer').style.visibility = 'hidden';
 //declare function that has the timer and will go to the next step once it stops at zero
 function prepareQuiz() {
-    document.getElementsByClassName('.timer').style.visibility = 'visible';
+
+   //  document.getElementsByClassName('timer').style.visibility = 'visible';
     //created a variable for 5 seconds, which will notify user how many seconds there are until quiz begins.
     var seconds = 3;
     //create countdown timer.
@@ -68,7 +74,7 @@ function prepareQuiz() {
         //clears timer
         if (seconds === 0) {
             divTimer.textContent = " ";
-            document.getElementsByClassName('.timer').style.visibility = 'hidden';
+            // document.getElementsByClassName('.timer').style.visibility = 'hidden';
             //stop timer
             clearInterval(questionInterval);
             // You need to add function to show what happens when timer equals zero
@@ -76,35 +82,65 @@ function prepareQuiz() {
         //this will subtract 1 second at a time
         seconds--;
     }, 1000);
-    //call the next function for
-    showQuestion();
-}
 
+}
+//call the next function for
+showQuestion();
+
+
+
+//function to show questions
 function showQuestion() {
-    
-    //grabbing question from the array
-    // divQuestions.textContent = quizQuestion[questionIndex].quotes;
-    // divQuiz.textContent = quizQuestion[questionIndex].answerIndex;
-    var presentQuestion = quizQuestion[questionIndex];
-    var answers = presentQuestion.choices;
-    var quoteElement = document.getElementById('question-quote');
-    quoteElement.textContent = presentQuestion.quotes;
-    elAnswers.innerHTML = "";
-    answers.forEach(function (choice, index) {
-        var choiceBtn = document.createElement('button');
-        choiceBtn.setAttribute('class', 'choices');
-        choiceBtn.setAttribute('value', 'choices');
-        choiceBtn.textContent = index + 1 + "." + choice;
-        // add an event listener to choice button
-        choiceBtn.onclick = choiceClick;
-        elAnswers.appendChild(choiceBtn);
-    });
-    
-    choiceClick();
-    showQuestion();
-}
+
+      
+
+    if (questionIndex < quizQuestion.length) {
+        //this will display questions onto the page
+        divQuestions.textContent = quizQuestion[questionIndex].quotes;
+        //create element to show answers
+        var listTag = document.createElement('ol');
+        elAnswers.appendChild.listTag;
+        //variable that holds correct answer for current question
+        var correctAnswer = quizQuestion[questionIndex].answerIndex;
+        // loop to create li tags to display number of choices based on question index
+        for (var i = 0; i < quizQuestion[questionIndex].choices.length; i++) {
+            var choiceTag = document.createElement('li');
+            listTag.appendChild.choiceTag;
+            choiceTag.textContent = quizQuestion[questionIndex].choices[i];
+
+            // what happens when a choice has been selected
+            choiceTag.addEventListener('click', function (event) {
+                console.log("Question");
+                //this is the variable to store users choice
+                var userChoice = event.target.textContent;
+                //show the user's choice
+                console.log("User choice " + userChoice);
+                //show correct answer
+                console.log("correct answer " + quizQuestion[questionIndex].choices[correctAnswer]);
+
+                if (userChoice === quizQuestion[questionIndex].choices[correctAnswer]) {
+                    console.log('correct');
+                    scoreCount++;
+                    console.log('Current Score ' + scoreCount);
+
+                } else {
+                    console.log('incorrect');
+                }
+                //increase question index by 1
+                questionIndex++;
+                //update total score
+                totalScore = scoreCount;
+                //rerun function until timer reaches 0 or all questions have been answered. 
 
 
+
+            })
+        }
+
+    }
+
+};
+showQuestion();
 
 
 function choiceClick() {
