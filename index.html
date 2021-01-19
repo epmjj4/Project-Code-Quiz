@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <div>
+    <div class="hide" id="scores.div">
         <form action= "scores.html">
 
             <button class="scores" type="View HighScores">View High Scores</button>
@@ -20,7 +20,7 @@
     <div class="timer">Time: <span id="time"></span></div>
 
 
-    
+    <!-- // add start in css to targer -->
 <div class="container">
     <div id="start-screen"class="start">
         <h1>Coding Quiz Challenge</h1>
@@ -29,21 +29,18 @@
             limit. Keep in mind that incorrect answers will penalize your
             score/time by ten seconds!
         </p>
-        <button id="startButton" class="hide">Begin Quiz</button>
+        <button id="startButton" >Begin Quiz</button>
     </div>
 
 
 <div id="questions" class="hide">
-<h2 id="question-quote"></h2>
-<div class="choices" id="choices">
-    <ol>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-    </ol>
+
+    <h2 id="question-quote"></h2>
+    <ol class="choices" id="choices"></ol>
+
 </div>
-</div>
+
+    
 
 <div id="end-screen" class="hide">
 <h2>All Done</h2>
