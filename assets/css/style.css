@@ -8,12 +8,10 @@ body{
     margin-bottom: 50px;
 }
 
-#time,.questions{
+#time{
     font-size: 25px;
     color: navy;
 }
-#clearBtn{
-    padding-bottom: 50px;
-}
+
 
 
