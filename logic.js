@@ -1,183 +1,166 @@
-var quizQuestion = [{
-        quotes: "Arrays in JavaScript can be used to store _____.",
-        answerIndex: 3, //"4. all the above"
-        choices: [" numbers and strings", "2. other arrays", "3. booleans", "4. all of the above"]
+//targeted id's for the answers
+var answerA = document.querySelector('#answer-1');
+var answerB = document.querySelector('#answer-2');
+var answerC = document.querySelector('#answer-3');
+var answerD = document.querySelector('#answer-4');
+var answerE = document.querySelector('#answer-5');
+//targeted id's for questino choices
+var choiceA = document.querySelector('#choice-A');
+var choiceB = document.querySelector('#choice-B');
+var choiceC = document.querySelector('#choice-C');
+var choiceD = document.querySelector('#choice-D');
+var choiceE = document.querySelector('#choice-E');
+//targetting start button   
+var startBtn = document.querySelector('#startBtn');
+// question list ID
+var questionList = document.querySelector('#questionList');
+//question id
+var questionTitle = document.querySelector('#questionTitle');
+//form ID
+var questionForm = document.querySelector('#questionForm');
+//time id
+var time = document.querySelector('#time');
+//total seconds of quiz
+var secondsLeft = 7;
+//quizQuestion Index
+var currentQuestion = 0;
+//user choices
+var userChoice = '';
+//correct answer
+var correctAnswer = '';
+//score
+var score = 0;
+//endscreen
+var finalScore = document.querySelector('#finalScore');
+//score count
+var scoreCount = document.querySelector('#scoreCounter');
+// message id
+var message = document.querySelector('#msg');
+//submit with name ID
+var playerName = document.querySelector('#playerName')
+// Enter you user name 
+var userName = document.querySelector('#userName');
+//submit button
+var submitBtn = document.querySelector('#sumbit');
 
-    },
-    {
-        quotes: "String Values must be enclosed within ____ when being assigned to variables",
-        answerIndex: 3, //"4. parenthesis"
-        choices: [" commas", "2. curly brackets", "3. quotes", "4. parenthesis"]
+//begin quiz
+function beginQuiz() {
+    var quizBtn = document.querySelector('#beginQuiz');
+    // removes beginQuiz class when button is clicked
+    quizBtn.setAttribute('style', 'display: none');
+    // calls to radio buttons can be displayed
+    questionForm.removeAttribute('class');
+}
 
-    },
-    {
-        quotes: "The condition in an if/else statement is enclosed with ____.",
-        answerIndex: 2, //"3. parenthesis"
-        choices: ["quotes", "2.curly brackets ", "3. parenthesis", "4.square brackets"]
+//timer
+function timer() {
+    var quizInterval = setInterval(function () {
+        secondsLeft--;
+        time.textContent = "You have  " +  secondsLeft  + " until Quiz is over."
+        if (secondsLeft === 0) {
+            clearInterval(quizInterval);
+            alert('Sorry, but you are out of time.')
+        }
+    }, 1000);
+}
 
-    },
-    {
-        quotes: "Commonly used data types DO NOT include:",
-        answerIndex: 2, //"3. alert"
-        choices: [" strings", "2. booleans", "3. alert", "4. numbers"]
+function showQuestion() {
+    // this will grab index from the quizQuestion array
+    var question = quizQuestion[currentQuestion];
+    // the questionTitle will be displayed in questionList div
+    questionTitle.innerHTML = question.quotes;
 
-    },
-    {
-        quotes: "A very useful tool for users during development and debugging for printing content to the debugger is:",
-        answerIndex: 3, //"4. console log"
-        choices: [" Javascript", "2. terminal/bash", "3. for loops", "4. console log"]
+    choiceA.textContent = question.answerIndex.a;
+    choiceB.textContent = question.answerIndex.b;
+    choiceC.textContent = question.answerIndex.c;
+    choiceD.textContent = question.answerIndex.d;
+    choiceE.textContent = question.answerIndex.e;
+    correctAnswer = question.choices;
+    //message
+    msg.textContent = ('');
+    finalScore = ('');
+}
 
-    },
+function rightAnswer() {
+    // if the user chooses correct answer, they will receive one point
+    // and message will displayed that it is correct. 
+    if (userChoice === correctAnswer) {
+        score++;
+        scoreCount.innerHTML = "Current Score " + score;
+        msg.textContent = "You are correct";
+    } else {
+        // if answer is not correct, they will get a 5 sec penalty
+        scoreCount.innerHTML = "Current Score " + score;
+        secondsLeft -= 5;
+        msg.textContent = "You chose wrong answer, you will penalized time";
+    }
+    setTimeout(function () {
+        // this will make sure function goes through entire loop
+        currentQuestion++;
+        if (currentQuestion < quizQuestion.length) {
+            rightAnswer();
+            //once last quesiton is answered , game will end
 
-];
-var questionIndex = 0;
-var questionTime = quizQuestion.length * 15;
+        } else {
+            gameOver();
+        }
+        // the function will wait 3 secs after answer is clicked to move onto next question
+    }, 3000);
+}
 
-//this will display time onto the page
-var divTimer = document.getElementById('time');
-//I created a divQuestions variable to target questions ID.
-var divQuestions = document.getElementById('questions');
-//I created a elAnswers variable to target and ordered list with choices ID.
-var elAnswers = document.getElementById("choices");
-//I created a hidden variable to hide text content once quiz starts
-//var hidden = document.getElementsByClassName('hide');
-//I created a startButton variable to target button on the page and start the quiz.
-var startBtn = document.getElementById("startButton");
-//this will show if the answers are right or wrong
-var rightWrongEl = document.getElementById('rightWrong');
-var endQuiz = true;
-//This will show current score count
-var scoreCount = 0;
-//This will show total score
-var totalScore = 0;
+function gameOver(){
+    // when game is done, questions, timer, and msg for correct/incorrect are not displayed
+    questionList.setAttribute("style", "display: none;");
+    time.setAttribute("style", "display: none;");
+    msg.setAttribute("style", "display: none;");
+    finalScore.textContent = "You score " + score + " points";
+    playerName.removeAttribute('class');
+}
+//players score and name saved to localStorage
+function playerScore(){
+    var inputName = userName.nodeValue.trim();
+    console.log(inputName);
+    // make sure their are no blank initials
+    if(inputName !== ""){
+        var highscores = JSON.parse(window.localStorage.getItem("score")) || [];
+        //user input storage format 
+        var inputScore = {
+            score: score,
+            inputName: inputName
+        };
 
-var questionSpot = document.getElementById('question-quote');
+        //adding the new score and the name to the array of high scores
+        highscores.push(inputScore);
+        //add the high score to the local storage
+        window.localStorage.setItem("score", JSON.stringify(highscores));
+        //change the url to score.html page
+        window.location.href = "scores.html";
 
-startBtn.addEventListener("click", function (event) {
-    console.log(event.target);
-   var startScreen = document.querySelector('#start-screen');
-   startScreen.classList.add('hide')
-    prepareQuiz();
+    }
+}
+// when start button is clicked, it will call beginQuiz, timer, and showQuestion functions
+startBtn.addEventListener('click', function(){
+    beginQuiz();
+    timer();
     showQuestion();
 });
+//submit button
+submitBtn.addEventListener('click', function(){
+    playerScore();
+})
 
- //document.getElementsByClassName('timer').style.visibility = 'hidden';
-//declare function that has the timer and will go to the next step once it stops at zero
-function prepareQuiz() {
-
-   //  document.getElementsByClassName('timer').style.visibility = 'visible';
-  //created a variable for 5 seconds, which will notify user how many seconds there are until quiz begins.
-    var seconds = 3;
-    //create countdown timer.
-    var questionInterval = setInterval(function () {
-        //print the number of seconds to console.
-        console.log(seconds);
-        //should display words on the page
-        divTimer.textContent = seconds + " seconds until the Quiz ends. Good luck!!";
-        //clears timer
-        if (seconds === 0) {
-            divTimer.textContent = " ";
-            // document.getElementsByClassName('.timer').style.visibility = 'hidden';
-            //stop timer
-            clearInterval(questionInterval);
-            // You need to add function to show what happens when timer equals zero
-        }
-        //this will subtract 1 second at a time
-        seconds--;
-    }, 1000);
-
-}
-//call the next function for
-//showQuestion();
-
-//function to show questions
-function showQuestion() {
-    divQuestions.classList.remove('hide');
-
-    if (questionIndex < quizQuestion.length) {
-        //this will display questions onto the page
-        questionSpot.textContent = quizQuestion[questionIndex].quotes;
-        //create element to show answers
-       // var listTag = document.createElement('ol');
-        //elAnswers.appendChild(listTag);
-        //variable that holds correct answer for current question
-        //var correctAnswer = quizQuestion[questionIndex].answerIndex;
-        // loop to create li tags to display number of choices based on question index
-        for (var i = 0; i < quizQuestion[questionIndex].choices.length; i++) {
-            var choiceTag = document.createElement('li');
-           
-            choiceTag.textContent = quizQuestion[questionIndex].choices[i];
-            elAnswers.appendChild(choiceTag);
-
-            // add event listener to choices div
-
-            // what happens when a choice has been selected
-            // choiceTag.addEventListener('click', function (event) {
-            //     console.log("Question");
-            //     //this is the variable to store users choice
-            //     var userChoice = event.target.textContent;
-            //     //show the user's choice
-            //     console.log("User choice " + userChoice);
-            //     //show correct answer
-            //     console.log("correct answer " + quizQuestion[questionIndex].choices[correctAnswer]);
-
-            //     if (userChoice === quizQuestion[questionIndex].choices[correctAnswer]) {
-            //         console.log('correct');
-            //         scoreCount++;
-            //         console.log('Current Score ' + scoreCount);
-
-            //     } else {
-            //         console.log('incorrect');
-            //     }
-            //     //increase question index by 1
-            //     questionIndex++;
-            //     //update total score
-            //     totalScore = scoreCount;
-            //     //rerun function until timer reaches 0 or all questions have been answered. 
-
-
-
-            // })
-        }
-
-    }
+//When you select a choice
+function pickChoice(event){
+    var button = event.target;
+    userChoice = button.dataset.answer;
+    rightAnswer();
 
 };
-// showQuestion();
 
-
-function choiceClick() {
-    if (this.value !== quizQuestion[questionIndex].answer) {
-        questionTime -= 15;
-
-        if (questionTime < 0) {
-            questionTime = 0;
-        }
-        divTimer.textContent = questionTime;
-        rightWrongEl.textContent = "Wrong";
-    } else {
-        rightWrongEl.textContent = "You are Correct";
-    }
-    rightWrongEl.setAttribute('class', 'rightWrong');
-    setTimeout(function () {
-        rightWrongEl.setAttribute('class', "rightWrong hide");
-    }, 1000);
-
-    questionIndex++;
-    if (questionIndex === quizQuestion.length) {
-        endQuiz();
-    } else {
-        showQuestion();
-    }
-
-}
-//startBtn.onclick = showQuestion();
-
-
-//add event listener for elAnswer w/ click event to call function check answer 
-//in function check answer we 
-//check if they click a list item
-
-//check if they had correct answer
-//decrement the score. 
-// call show question. 
+//event listener for each choice and when click 
+//it will call the pickChoice 
+answerA.addEventListener("click", pickChoice);
+answerB.addEventListener("click", pickChoice);
+answerC.addEventListener("click", pickChoice);
+answerD.addEventListener("click", pickChoice);
+answerE.addEventListener("click", pickChoice);

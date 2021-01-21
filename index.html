@@ -6,54 +6,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Code Quiz</title>
     <link rel="stylesheet" href="style.css">
-    </link>
+
 </head>
 
 <body>
-    <div class="hide" id="scores.div">
-        <form action= "scores.html">
+    <!-- this will go to scores.html page -->
+    <section>
+        <a href="scores.html">Scores</a>
+        <h2 id="time"></h2>
+        <h2 id="scoreCounter"></h2>
+    </section>
 
-            <button class="scores" type="View HighScores">View High Scores</button>
-        </form>
-      
-    </div>
-    <div class="timer">Time: <span id="time"></span></div>
-
-
-    <!-- // add start in css to targer -->
-<div class="container">
-    <div id="start-screen"class="start">
-        <h1>Coding Quiz Challenge</h1>
-        <p>
-            Try to answer the following code-related questions within the time
+    <section id="beginQuiz">
+        <h1>Javascript Code Quiz</h1>
+        <p>Try to answer the following code-related questions within the time
             limit. Keep in mind that incorrect answers will penalize your
-            score/time by ten seconds!
+            score/time by ten seconds!</p>
+        <button id="startBtn">Begin Quiz</button>
+    </section>
+
+    <!-- displays the radio buttons -->
+    <div class="questions" id="questionList">
+        <form id="questionForm" class="cover">
+            <h4 id="questionTitle" data-question=""></h4>
+            <input type="radio" class="choice" id="answer-1" name="choice" data-answer="a">
+            <label id="choice-A" for="ans1"></label><br>
+            <input type="radio" class="choice" id="answer-2" name="choice" data-answer="b">
+            <label id="choice-B" for="ans2"></label><br>
+            <input type="radio" class="choice" id="answer-3" name="choice" data-answer="c">
+            <label id="choice-C" for="ans3"></label><br>
+            <input type="radio" class="choice" id="answer-4" name="choice" data-answer="d">
+            <label id="choice-D" for="ans4"></label><br>
+            <input type="radio" class="choice" id="answer-5" name="choice" data-answer="e">
+            <label id="choice-E" for="ans5"></label><br>
+        </form>
+    </div>
+
+    <h3 id="msg"></h3>
+    <!-- final score-->
+    <h3 id="finalScore"></h3>
+    <!-- Submit Button-->
+    <div id="playerName">
+        <p>
+            Enter your name: <input type="text" id="userName" maxlength="20">
+            <button id="sumbit">Submit</button>
         </p>
-        <button id="startButton" >Begin Quiz</button>
     </div>
 
-
-<div id="questions" class="hide">
-
-    <h2 id="question-quote"></h2>
-    <ol class="choices" id="choices"></ol>
-
-</div>
-
-    
-
-<div id="end-screen" class="hide">
-<h2>All Done</h2>
-<p>Your final Score <span id="final-score"></span></p>
-<p>Enter initials : <input type="text" id="initials" max="3"></p>
-<button id="submit">Submit</button>
-</div>    
-  <div class="rightWrong" class="rightWrong hide">
-</div>
-  </div>      
-    </div>
-    <script src="logic.js"></script>
     <script src="questions.js"></script>
+    <script src="logic.js"></script>
 </body>
 
 </html>

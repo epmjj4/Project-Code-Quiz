@@ -1,29 +1,16 @@
 body{
     background-color: rgb(150, 150, 240);
 }
-#startButton, #scoresbutton, #submit, .scores{
+#startBtn, #submit {
     background-color: cornflowerblue;
     width: 10%;
     height: 50px;
     margin-bottom: 50px;
 }
 
-.timer,#questions{
+#time,.questions{
     font-size: 25px;
     color: navy;
 }
-
-#scoresbutton{
-    margin-top: 50px;
-}
-.selection {
-    height: 15px;
-    width: 25px;
-}
-
-.hide {
-    display: none;
-}
-
 
 
