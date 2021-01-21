@@ -12,7 +12,7 @@
 <body>
     <!-- this will go to scores.html page -->
     <section>
-        <a class="scoreHTML" href="scores.html">Scores</a>
+        <a class="hide" href="scores.html">Scores</a>
         <h2 id="time"></h2>
         <h2 id="scoreCounter"></h2>
     </section>
@@ -26,7 +26,7 @@
     </section>
 
     <!-- displays the radio buttons -->
-    <div class="questions" id="questionList">
+    <div class="questions hide" id="questionList">
         <form id="questionForm" class="cover">
             <h4 id="questionTitle" data-question=""></h4>
             <input type="radio" class="choice" id="answer-1" name="choice" data-answer="a">
@@ -46,7 +46,7 @@
     <!-- final score-->
     <h3 id="finalScore"></h3>
     <!-- Submit Button-->
-    <div id="playerName">
+    <div class="hide" id="playerName">
         <p>
             Enter your name: <input type="text" id="userName" maxlength="20">
             <button id="sumbit">Submit</button>

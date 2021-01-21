@@ -42,14 +42,19 @@ var playerName = document.querySelector('#playerName')
 var userName = document.querySelector('#userName');
 //submit button
 var submitBtn = document.querySelector('#sumbit');
+var hide = document.querySelector('.hide')
+var questionsDiv = document.querySelector('#questionList')
+
 
 //begin quiz
 function beginQuiz() {
     var quizBtn = document.querySelector('#beginQuiz');
     // removes beginQuiz class when button is clicked
-    quizBtn.setAttribute('style', 'display: none');
+    // quizBtn.setAttribute('style', 'display: none');
+    //  hide.setAttribute('style', 'display: none');
+    //  questionList.setAttribute('style', 'display: none');
     // calls to radio buttons can be displayed
-    questionForm.removeAttribute('class');
+    questionsDiv.classList.remove("hide");
 }
 
 //timer
@@ -65,17 +70,19 @@ function timer() {
 }
 
 function showQuestion() {
+
+   
     // this will grab index from the quizQuestion array
     var question = quizQuestion[currentQuestion];
     // the questionTitle will be displayed in questionList div
     questionTitle.innerHTML = question.quotes;
 
-    choiceA.textContent = question.answerIndex.a;
-    choiceB.textContent = question.answerIndex.b;
-    choiceC.textContent = question.answerIndex.c;
-    choiceD.textContent = question.answerIndex.d;
-    choiceE.textContent = question.answerIndex.e;
-    correctAnswer = question.choices;
+    choiceA.textContent = question.choices[0];
+    choiceB.textContent = question.choices[1];
+    choiceC.textContent = question.choices[2];
+    choiceD.textContent = question.choices[3];
+    choiceE.textContent = question.choices[4];
+    correctAnswer = question.answerIndex;
     //message
     msg.textContent = ('');
     finalScore = ('');

@@ -12,6 +12,9 @@ body{
     font-size: 25px;
     color: navy;
 }
+.hide {
+    display:none;
+}
 
 
 
