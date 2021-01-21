@@ -1,7 +1,7 @@
 body{
     background-color: rgb(150, 150, 240);
 }
-#startBtn, #submit {
+#startBtn, #submit, #clearBtn,.home {
     background-color: cornflowerblue;
     width: 10%;
     height: 50px;
@@ -11,6 +11,9 @@ body{
 #time,.questions{
     font-size: 25px;
     color: navy;
+}
+#clearBtn{
+    padding-bottom: 50px;
 }
 
 
