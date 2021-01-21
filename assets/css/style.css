@@ -1,14 +1,14 @@
 body{
     background-color: rgb(150, 150, 240);
 }
-#startBtn, #submit, #clearBtn,.home {
+#startBtn, #submit, #clearBtn,.home{
     background-color: cornflowerblue;
     width: 10%;
     height: 50px;
     margin-bottom: 50px;
 }
 
-#time{
+#time, #beginQuiz{
     font-size: 25px;
     color: navy;
 }
